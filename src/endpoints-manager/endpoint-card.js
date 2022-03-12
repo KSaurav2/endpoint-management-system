@@ -2,6 +2,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import * as React from "react";
 import styled from "styled-components";
+import dynamicRefsUtil from "../utils/dynamic-refs-util";
 
 const CardWrapper = styled.div`
   & .MuiCard-root {
@@ -9,6 +10,10 @@ const CardWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    pointer-events: none;
+    &.selected {
+      background-color: lightgrey;
+    }
   }
 `;
 
@@ -18,22 +23,29 @@ export default function EndpointCard({
   renderPrimaryText,
   renderSecondaryText
 }) {
+  console.log("Card Render");
   return (
-    <CardWrapper>
-      <Card>
+    <CardWrapper data-devicename={endPointItem.deviceName}>
+      <Card ref={dynamicRefsUtil.setRef(endPointItem.deviceName)}>
         <CardContent>
           {endPointItemsMapper.map((endPointItemMapper) => {
-            if (endPointItemMapper.type === "primary") {
-              return renderPrimaryText(
-                endPointItemMapper.label,
-                endPointItem[endPointItemMapper.id]
-              );
-            } else {
-              return renderSecondaryText(
-                endPointItemMapper.label,
-                endPointItem[endPointItemMapper.id]
-              );
-            }
+            return (
+              <div key={`${endPointItem.deviceName}_${endPointItemMapper.id}`}>
+                {(() => {
+                  if (endPointItemMapper.type === "primary") {
+                    return renderPrimaryText(
+                      endPointItemMapper.label,
+                      endPointItem[endPointItemMapper.id]
+                    );
+                  } else {
+                    return renderSecondaryText(
+                      endPointItemMapper.label,
+                      endPointItem[endPointItemMapper.id]
+                    );
+                  }
+                })()}
+              </div>
+            );
           })}
         </CardContent>
       </Card>

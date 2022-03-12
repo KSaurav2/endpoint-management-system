@@ -9,11 +9,20 @@ const EndpointsActionsWrapper = styled.div`
   }
 `;
 
-function EndpointsActions({ actions }) {
+function EndpointsActions({ actions, onActionBtnClick, disabled }) {
   return (
     <EndpointsActionsWrapper>
       {actions.map((action) => {
-        return <Button variant="contained">{action.actionLabel}</Button>;
+        return (
+          <Button
+            key={action.actionType}
+            variant="contained"
+            disabled={disabled}
+            onClick={() => onActionBtnClick(action.actionLabel)}
+          >
+            {action.actionLabel}
+          </Button>
+        );
       })}
     </EndpointsActionsWrapper>
   );

@@ -1,20 +1,30 @@
 import { Grid } from "@mui/material";
-import React from "react";
+import React, { createRef, useRef } from "react";
 import EndpointCard from "./endpoint-card";
 import Typography from "@mui/material/Typography";
 import { ENDPONT_ITEMS_MAPPER } from "../constants";
 
-function EndpointsGridRenderer({ endpointsData = [] }) {
+function EndpointsGridRenderer({ endpointsData = [], onGridItemClick }) {
+  console.log("Render");
   return (
     <>
       <Grid
         container
         rowSpacing={4}
         columnSpacing={{ xs: 1, sm: 2, md: 3, lg: 4 }}
+        onClick={onGridItemClick}
       >
         {endpointsData.map((endPointItem) => {
           return (
-            <Grid item xs={12} sm={6} md={4} lg={4} xl={3}>
+            <Grid
+              key={`${endPointItem.deviceName}_GridItem`}
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              lg={4}
+              xl={3}
+            >
               <EndpointCard
                 endPointItemsMapper={ENDPONT_ITEMS_MAPPER}
                 endPointItem={endPointItem}
@@ -45,4 +55,4 @@ function EndpointsGridRenderer({ endpointsData = [] }) {
   );
 }
 
-export default EndpointsGridRenderer;
+export default React.memo(EndpointsGridRenderer);
