@@ -149,10 +149,6 @@ export default function EndpointsManager() {
     });
   };
 
-  console.log({
-    selectedEndpointsData
-  });
-
   const onGridItemClick = useCallback(
     (event) => {
       const deviceName = event.target.getAttribute("data-devicename");
