@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useReducer, useRef } from "react";
 
-const ActionLogsContext = React.createContext();
+export const ActionLogsContext = React.createContext();
 
 export const useActionLogs = () => useContext(ActionLogsContext);
 

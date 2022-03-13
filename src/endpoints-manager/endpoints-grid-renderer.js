@@ -1,8 +1,8 @@
 import { Grid } from "@mui/material";
-import React, { createRef, useRef } from "react";
-import EndpointCard from "./endpoint-card";
+import React from "react";
 import Typography from "@mui/material/Typography";
 import { ENDPONT_ITEMS_MAPPER } from "../constants";
+import DataCard from "../components/card";
 
 function EndpointsGridRenderer({ endpointsData = [], onGridItemClick }) {
   console.log("Render");
@@ -25,7 +25,7 @@ function EndpointsGridRenderer({ endpointsData = [], onGridItemClick }) {
               lg={4}
               xl={3}
             >
-              <EndpointCard
+              <DataCard
                 endPointItemsMapper={ENDPONT_ITEMS_MAPPER}
                 endPointItem={endPointItem}
                 renderPrimaryText={(label, value) => {

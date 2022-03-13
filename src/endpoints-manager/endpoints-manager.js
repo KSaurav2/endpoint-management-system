@@ -97,7 +97,9 @@ const ScreenLabel = styled.div`
 `;
 
 const EndpointsManagerWrapper = styled.main`
+  display: block;
   padding: 20px;
+  margin-top: 50px;
 `;
 
 function reducer(state = [], action) {
@@ -141,7 +143,7 @@ export default function EndpointsManager() {
     const actionLogsPayload = {
       action: actionLabel,
       devices: selectedEndpointsData,
-      time: new Date().getMilliseconds()
+      time: new Date().toLocaleString()
     };
     addActionLogs(actionLogsPayload, () => {
       toast.success("Action Successful!");

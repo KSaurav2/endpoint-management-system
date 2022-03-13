@@ -17,7 +17,7 @@ const CardWrapper = styled.div`
   }
 `;
 
-export default function EndpointCard({
+export default function DataCard({
   endPointItemsMapper,
   endPointItem,
   renderPrimaryText,
