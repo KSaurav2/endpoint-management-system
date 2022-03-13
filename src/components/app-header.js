@@ -11,12 +11,7 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
-const pages = [
-  { page: "Endpoints Manager", link: "/manager" },
-  { page: "Endpoints Logs", link: "/logs" }
-];
-
-const AppHeader = () => {
+const AppHeader = ({ appName, appLinks }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   let navigate = useNavigate();
 
@@ -43,13 +38,13 @@ const AppHeader = () => {
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            Endpoint Management System
+            {appName}
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
-              aria-label="account of current user"
+              aria-label="app pages"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
@@ -75,7 +70,7 @@ const AppHeader = () => {
                 display: { xs: "block", md: "none" }
               }}
             >
-              {pages.map((page) => (
+              {appLinks.map((page) => (
                 <MenuItem
                   key={page.page}
                   onClick={() => handleBtnClick(page.link)}
@@ -91,10 +86,10 @@ const AppHeader = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
           >
-            Endpoint Management System
+            {appName}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {appLinks.map((page) => (
               <Button
                 key={page.page}
                 onClick={() => handleBtnClick(page.link)}

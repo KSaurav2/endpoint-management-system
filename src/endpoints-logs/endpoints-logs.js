@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import DataGridWrapper from "../components/data-grid";
-import { ENDPOINTS_ACTIONS_GRID_COLUMNS } from "../constants";
+import { ENDPOINTS_ACTIONS_GRID_COLUMNS, TEXT } from "../constants";
 import { ActionLogsContext } from "../providers/action-logs-provider";
 
 const EndpointsActionsWrapper = styled.main`
-  display: block;
   padding: 20px;
   margin-top: 50px;
 `;
@@ -23,7 +22,7 @@ class EndpointsLogs extends React.Component {
         {(ctx) => {
           return (
             <EndpointsActionsWrapper>
-              <ScreenLabel>Endpoints Action Logs</ScreenLabel>
+              <ScreenLabel>{TEXT.ENDPOINT_ACTION_LOGS}</ScreenLabel>
               <DataGridWrapper
                 rows={ctx.actionLogs}
                 columns={ENDPOINTS_ACTIONS_GRID_COLUMNS}

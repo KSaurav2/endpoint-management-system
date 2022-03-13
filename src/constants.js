@@ -16,3 +16,21 @@ export const ENDPOINTS_ACTIONS_GRID_COLUMNS = Object.freeze([
   { field: "devices", headerName: "Devices", flex: 1 },
   { field: "time", headerName: "Time", flex: 1 }
 ]);
+
+export const APP_LINKS = Object.freeze([
+  { page: "Endpoints Manager", link: "/manager" },
+  { page: "Endpoints Logs", link: "/logs" }
+]);
+
+export const TEXT = Object.freeze({
+  ENDPOINT_MANAGEMENT_SYSTEM: "Endpoint Management System",
+  PRIMARY: "primary",
+  ENDPOINT_ACTION_LOGS: "Endpoints Action Logs",
+  DEVICE_NAME: "deviceName",
+  ADD: "ADD",
+  CLEAR: "CLEAR",
+  AVAILABLE_ENDPOINTS: "Available Endpoints",
+  API_ERROR: "Error while fetching data...",
+  ACTION_SUCCESS: "Action Successful!",
+  SELECTED: "selected"
+});

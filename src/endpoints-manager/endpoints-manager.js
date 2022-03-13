@@ -2,10 +2,11 @@ import styled from "styled-components";
 import React, { useCallback, useEffect, useReducer, useState } from "react";
 import EndpointsActions from "./endpoints-actions";
 import EndpointsGridRenderer from "./endpoints-grid-renderer";
-import { ENDPOINTS_ACTIONS } from "../constants";
+import { ENDPOINTS_ACTIONS, TEXT } from "../constants";
 import { useActionLogs } from "../providers/action-logs-provider";
 import dynamicRefsUtil from "../utils/dynamic-refs-util";
 import { toast } from "react-toastify";
+import Loader from "../components/loader";
 
 const ScreenLabel = styled.div`
   float: left;
@@ -14,14 +15,13 @@ const ScreenLabel = styled.div`
 `;
 
 const EndpointsManagerWrapper = styled.main`
-  display: block;
   padding: 20px;
   margin-top: 50px;
 `;
 
 function reducer(state = [], action) {
   switch (action.type) {
-    case "ADD": {
+    case TEXT.ADD: {
       const stateCopy = [...state];
       const idx = stateCopy.indexOf(action.payload);
       if (idx > -1) {
@@ -31,7 +31,7 @@ function reducer(state = [], action) {
       }
       return stateCopy;
     }
-    case "CLEAR": {
+    case TEXT.CLEAR: {
       return [];
     }
     default: {
@@ -42,6 +42,7 @@ function reducer(state = [], action) {
 
 export default function EndpointsManager() {
   const [endpointsData, setEndpointsData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { addActionLogs } = useActionLogs();
   const [selectedEndpointsData, setSelectedEndpointsData] = useReducer(
     reducer,
@@ -49,20 +50,25 @@ export default function EndpointsManager() {
   );
 
   useEffect(() => {
+    setIsLoading(true);
     fetch("https://api.mockaroo.com/api/08100050?count=1000&key=3e2ade60")
       .then((response) => response.json())
-      .then((response) => setEndpointsData(response))
+      .then((response) => {
+        setEndpointsData(response);
+        setIsLoading(false);
+      })
       .catch((err) => {
-        toast.error("Error while fetching endpoints data");
+        setIsLoading(false);
+        toast.error(TEXT.API_ERROR);
       });
   }, []);
 
   const clearSelectedEndpointsData = () => {
     selectedEndpointsData.forEach((deviceName) => {
       const cardRef = dynamicRefsUtil.getRef(deviceName);
-      cardRef.current.classList.remove("selected");
+      cardRef.current.classList.remove(TEXT.SELECTED);
     });
-    setSelectedEndpointsData({ type: "CLEAR" });
+    setSelectedEndpointsData({ type: TEXT.CLEAR });
   };
 
   const onActionBtnClick = (actionLabel) => {
@@ -73,28 +79,28 @@ export default function EndpointsManager() {
       time: new Date().toLocaleString()
     };
     addActionLogs(actionLogsPayload, () => {
-      toast.success("Action Successful!");
+      toast.success(TEXT.ACTION_SUCCESS);
       clearSelectedEndpointsData();
     });
   };
 
   const onGridItemClick = useCallback(
     (event) => {
-      const deviceName = event.target.getAttribute("data-devicename");
+      const deviceName = event.target.getAttribute("data-id");
       const cardRef = dynamicRefsUtil.getRef(deviceName);
-      if (cardRef.current.classList.contains("selected")) {
-        cardRef.current.classList.remove("selected");
+      if (cardRef.current.classList.contains(TEXT.SELECTED)) {
+        cardRef.current.classList.remove(TEXT.SELECTED);
       } else {
-        cardRef.current.classList.add("selected");
+        cardRef.current.classList.add(TEXT.SELECTED);
       }
-      setSelectedEndpointsData({ type: "ADD", payload: deviceName });
+      setSelectedEndpointsData({ type: TEXT.ADD, payload: deviceName });
     },
     [setSelectedEndpointsData]
   );
 
   return (
     <EndpointsManagerWrapper>
-      <ScreenLabel>Available Endpoints</ScreenLabel>
+      <ScreenLabel>{TEXT.AVAILABLE_ENDPOINTS}</ScreenLabel>
       <EndpointsActions
         actions={ENDPOINTS_ACTIONS}
         disabled={!selectedEndpointsData.length}
@@ -104,6 +110,7 @@ export default function EndpointsManager() {
         endpointsData={endpointsData}
         onGridItemClick={onGridItemClick}
       />
+      <Loader open={isLoading} />
     </EndpointsManagerWrapper>
   );
 }
