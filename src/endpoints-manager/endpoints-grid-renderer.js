@@ -17,7 +17,7 @@ function EndpointsGridRenderer({ endpointsData = [], onGridItemClick }) {
         {endpointsData.map((endPointItem) => {
           return (
             <Grid
-              key={`${endPointItem.deviceName}_GridItem`}
+              key={endPointItem.id}
               item
               xs={12}
               sm={6}
