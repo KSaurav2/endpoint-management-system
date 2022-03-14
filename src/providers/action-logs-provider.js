@@ -12,7 +12,6 @@ export function ActionLogsProvider({ children }) {
   );
 
   useEffect(() => {
-    console.log({ actionLogs });
     if (actionLogs.length) {
       callbackRef.current("success");
     }
