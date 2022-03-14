@@ -5,7 +5,7 @@ import styled from "styled-components";
 const EndpointsActionsWrapper = styled.div`
   float: right;
   & > button:not(:last-child) {
-    margin-right: 10px;
+    margin-right: 0.6rem;
   }
 `;
 

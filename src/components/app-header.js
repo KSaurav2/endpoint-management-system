@@ -30,7 +30,7 @@ const AppHeader = ({ appName, appLinks }) => {
 
   return (
     <AppBar position="fixed">
-      <Container maxWidth="xl">
+      <Container maxWidth="false">
         <Toolbar disableGutters>
           <Typography
             variant="h6"

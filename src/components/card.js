@@ -7,7 +7,7 @@ import dynamicRefsUtil from "../utils/dynamic-refs-util";
 
 const CardWrapper = styled.div`
   & .MuiCard-root {
-    min-height: 200px;
+    min-height: 12.5rem;
     display: flex;
     justify-content: center;
     align-items: center;

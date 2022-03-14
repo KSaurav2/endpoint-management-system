@@ -5,14 +5,14 @@ import { ENDPOINTS_ACTIONS_GRID_COLUMNS, TEXT } from "../constants";
 import { ActionLogsContext } from "../providers/action-logs-provider";
 
 const EndpointsActionsWrapper = styled.main`
-  padding: 20px;
-  margin-top: 50px;
+  padding: 1.25rem;
+  margin-top: 3.125rem;
 `;
 
 const ScreenLabel = styled.div`
   float: left;
   width: 100%;
-  font-size: 20px;
+  font-size: 1.2rem;
 `;
 
 class EndpointsLogs extends React.Component {
@@ -22,7 +22,7 @@ class EndpointsLogs extends React.Component {
         {(ctx) => {
           return (
             <EndpointsActionsWrapper>
-              <ScreenLabel>{TEXT.ENDPOINT_ACTION_LOGS}</ScreenLabel>
+              <ScreenLabel id="screenLabel">{TEXT.ENDPOINT_ACTION_LOGS}</ScreenLabel>
               <DataGridWrapper
                 rows={ctx.actionLogs}
                 columns={ENDPOINTS_ACTIONS_GRID_COLUMNS}

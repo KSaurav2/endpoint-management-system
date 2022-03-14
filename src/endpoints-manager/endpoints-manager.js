@@ -11,12 +11,12 @@ import Loader from "../components/loader";
 const ScreenLabel = styled.div`
   float: left;
   width: 100%;
-  font-size: 20px;
+  font-size: 1.25rem;
 `;
 
 const EndpointsManagerWrapper = styled.main`
-  padding: 20px;
-  margin-top: 50px;
+  padding: 1.25rem;
+  margin-top: 3.125rem;
 `;
 
 function reducer(state = [], action) {
