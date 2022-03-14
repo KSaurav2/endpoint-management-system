@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useReducer, useRef } from "react";
 
-const ActionLogsContext = React.createContext();
+export const ActionLogsContext = React.createContext();
 
 export const useActionLogs = () => useContext(ActionLogsContext);
 
@@ -12,7 +12,6 @@ export function ActionLogsProvider({ children }) {
   );
 
   useEffect(() => {
-    console.log({ actionLogs });
     if (actionLogs.length) {
       callbackRef.current("success");
     }
