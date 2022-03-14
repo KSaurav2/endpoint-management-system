@@ -8,7 +8,7 @@ import { ActionLogsProvider } from "./providers/action-logs-provider";
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/endpoint-management-system">
       <ActionLogsProvider>
         <App />
       </ActionLogsProvider>
